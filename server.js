@@ -4,16 +4,14 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
-const postRouter = require('./routes/postRoute') 
+const postRouter = require('./routes/postRoute')
 
-mongoose.connect('mongodb://localhost/test', () => {
-    console.log("Db is connected")
-});
+mongoose.connect('mongodb://localhost/test',{ useNewUrlParser: true });
 
 
 const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false },{ useNewUrlParser: true } ))
 
 app.use(bodyParser.json())
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const Scheam = mongoose.Schema
+const Schema = mongoose.Schema
 
-const PostSchema = new Scheam({
+const PostSchema = new Schema({
     title: {
         type:String,
         required:true,
@@ -33,11 +33,19 @@ const PostSchema = new Scheam({
         type:String,
         required: true,
         trim:true
-    }
+    },
+    comments:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ]
 
 },{
     timestamps:true
 })
+
+PostSchema.indexes({title:'text', body:'text',tag:'text'})
 
 const Post = mongoose.model('Post', PostSchema)
 
